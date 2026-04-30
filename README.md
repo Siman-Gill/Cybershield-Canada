@@ -2,7 +2,7 @@
 
 > A live Security Operations Centre platform serving Government of Canada, Banking, Healthcare, and IT sectors — with automated Canadian compliance mapping (PHIPA · PIPEDA · OSFI B-10 · ITSG-33)
 
-🔴 **[Live Demo →](https://cybershield-canada.streamlit.app)**  
+🔴 **[Live Demo →](https://cybershield-canada.streamlit.app/)**  
 📁 **[GitHub →](https://github.com/Siman-Gill/cybershield-canada)**
 
 ---
