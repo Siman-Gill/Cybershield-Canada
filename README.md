@@ -103,7 +103,7 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 # 4. Add your API key
-echo "OTX_API_KEY=your_key_here" > .env
+echo "OTX_API_KEY=69bcaf97d998e8684063fd5e9cc024ecf588b0a4e860a739845cf0660fb106e2" > .env
 echo "DATABASE_URL=sqlite:///./data/cybershield.db" >> .env
 # Get a free key at: otx.alienvault.com → Settings → API Key
 
