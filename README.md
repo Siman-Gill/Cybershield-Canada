@@ -168,7 +168,7 @@ This is a portfolio project built for educational and demonstration purposes. Al
 **Siman Gill** — Cybersecurity Professional  
 📍 Open to Toronto · Ottawa · Remote  
 🔗 [GitHub](https://github.com/Siman-Gill) | [LinkedIn](https://linkedin.com/in/simangill1/)  
-📧 your.email@email.com
+📧 simangill1@outlook.com
 
 ---
 
