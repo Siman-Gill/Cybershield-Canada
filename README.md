@@ -21,8 +21,9 @@ CyberShield Canada simulates a real enterprise SOC platform that:
 
 ## Screenshot
 
-<img width="1244" height="790" alt="Screenshot 2026-04-29 at 7 33 25 PM" src="https://github.com/user-attachments/assets/a8c741bc-d7e9-4923-83f4-3f44995438d4" />
-<img width="1244" height="790" alt="Screenshot 2026-04-29 at 7 33 15 PM" src="https://github.com/user-attachments/assets/bf57992b-fe69-4346-9deb-8342f228f2e9" />
+<img width="1244" height="790" alt="Screenshot 2026-04-29 at 7 33 15 PM" src="https://github.com/user-attachments/assets/e5f1adcc-b5c0-4517-b741-f4cbbf011273" />
+<img width="1244" height="790" alt="Screenshot 2026-04-29 at 7 33 25 PM" src="https://github.com/user-attachments/assets/04461992-b600-4def-b685-daf7f7270d40" />
+
 
 
 ---
