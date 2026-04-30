@@ -2,6 +2,49 @@
 # Run with: streamlit run dashboard/app.py
 # Then open: http://localhost:8501 in your browser
 
+# dashboard/app.py — add this block right after all your imports
+
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from data.database import Base, engine, SessionLocal, ThreatEvent
+from datetime import datetime
+
+# ── AUTO-CREATE DATABASE TABLES IF THEY DON'T EXIST ──────────
+# This runs every time the app starts — safe to call multiple times
+Base.metadata.create_all(bind=engine)
+
+# ── SEED SAMPLE DATA IF DATABASE IS EMPTY ─────────────────────
+def seed_sample_data():
+    db = SessionLocal()
+    count = db.query(ThreatEvent).count()
+    if count == 0:
+        print("Database empty — seeding sample Canadian threat data...")
+        sample_threats = [
+            ThreatEvent(ioc_type="ip",     ioc_value="185.220.101.45",          source="AlienVault OTX", severity="critical", sector="healthcare", compliance="PHIPA, PIPEDA",              description="Ransomware targeting Canadian hospitals — LockBit 3.0",             detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="domain", ioc_value="lockbit-canada.onion",     source="AlienVault OTX", severity="critical", sector="healthcare", compliance="PHIPA, PIPEDA",              description="Ransomware targeting Canadian hospitals — LockBit 3.0",             detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="hash",   ioc_value="a1b2c3d4e5f6a1b2c3d4",    source="AlienVault OTX", severity="critical", sector="healthcare", compliance="PHIPA, PIPEDA",              description="Ransomware targeting Canadian hospitals — LockBit 3.0",             detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="domain", ioc_value="fake-rbc-login.com",       source="AlienVault OTX", severity="high",     sector="banking",    compliance="OSFI B-10, PIPEDA, PCI-DSS", description="Banking phishing targeting Canadian Big 5",                         detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="ip",     ioc_value="91.108.56.122",            source="AlienVault OTX", severity="high",     sector="banking",    compliance="OSFI B-10, PIPEDA, PCI-DSS", description="Banking phishing targeting Canadian Big 5",                         detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="url",    ioc_value="http://td-secure.phish",   source="AlienVault OTX", severity="high",     sector="banking",    compliance="OSFI B-10, PIPEDA, PCI-DSS", description="Credential theft targeting TD Bank customers",                      detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="ip",     ioc_value="45.142.212.100",           source="AlienVault OTX", severity="critical", sector="government", compliance="ITSG-33, Privacy Act, PIPEDA", description="APT targeting Government of Canada infrastructure",              detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="domain", ioc_value="gc-secure-update.malware", source="AlienVault OTX", severity="critical", sector="government", compliance="ITSG-33, Privacy Act, PIPEDA", description="APT targeting Government of Canada infrastructure",              detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="domain", ioc_value="malicious-npm-pkg.io",     source="AlienVault OTX", severity="high",     sector="it",         compliance="PIPEDA",                     description="Supply chain attack on Canadian IT providers",                      detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="ip",     ioc_value="193.32.162.88",            source="AlienVault OTX", severity="high",     sector="it",         compliance="PIPEDA",                     description="Supply chain attack on Canadian IT providers",                      detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="ip",     ioc_value="103.216.221.15",           source="AlienVault OTX", severity="medium",   sector="healthcare", compliance="PHIPA, PIPEDA",              description="Credential stuffing targeting Ontario Health portals",              detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="url",    ioc_value="https://fake-ontario.ru",  source="AlienVault OTX", severity="medium",   sector="healthcare", compliance="PHIPA, PIPEDA",              description="Credential stuffing targeting Ontario Health portals",              detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="ip",     ioc_value="198.44.136.53",            source="AlienVault OTX", severity="high",     sector="banking",    compliance="OSFI B-10, PIPEDA, PCI-DSS", description="ATM skimming malware targeting Canadian credit unions",             detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="hash",   ioc_value="f1e2d3c4b5a6f1e2d3c4",    source="AlienVault OTX", severity="critical", sector="government", compliance="ITSG-33, Privacy Act, PIPEDA", description="Espionage malware targeting DND and RCMP systems",              detected_at=datetime.utcnow(), status="open"),
+            ThreatEvent(ioc_type="domain", ioc_value="fake-shopify-admin.net",   source="AlienVault OTX", severity="high",     sector="it",         compliance="PIPEDA",                     description="Phishing campaign targeting Canadian SaaS companies",               detected_at=datetime.utcnow(), status="open"),
+        ]
+        for threat in sample_threats:
+            db.add(threat)
+        db.commit()
+        print(f"Seeded {len(sample_threats)} sample threats")
+    db.close()
+
+seed_sample_data()
+
 import streamlit as st
 import pandas as pd
 import sys, os
